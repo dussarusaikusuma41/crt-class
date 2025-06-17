@@ -1,0 +1,60 @@
+// Java program to demonstrate Buffer Class
+
+// Importing required libraries
+import java.nio.*;
+import java.util.*;
+
+// Main class
+public class GFG {
+
+    // Main driver method
+    public static void main(String[] args)
+    {
+        // Declaring the capacity of the ByteBuffer
+        int capacity = 5;
+
+        // Try block to check for exceptions
+        try {
+
+            // Creating the ByteBuffer
+
+            // Creating object of ByteBuffer class and
+            // allocating size capacity
+            ByteBuffer bufferObj
+                = ByteBuffer.allocate(capacity);
+
+            // Putting the int to byte typecast
+            // value in ByteBuffer using put() method
+
+            // Custom input entries
+            bufferObj.put((byte)10);
+            bufferObj.put((byte)20);
+            bufferObj.put((byte)30);
+            bufferObj.put((byte)40);
+            bufferObj.put((byte)50);
+
+            // Typecasting ByteBuffer into Buffer
+            Buffer bufferObj1 = (Buffer)bufferObj;
+
+            // Getting array that backs this buffer
+            // using array() method
+            byte[] arr = (byte[])bufferObj1.array();
+
+            // Display message only
+            System.out.print(" The array is : [");
+
+            // Print the array
+            for (int i = 0; i < arr.length; i++)
+                System.out.print(" " + arr[i]);
+            System.out.print(" ]");
+        }
+
+        // Catch block to handle the exception
+        catch (ReadOnlyBufferException e) {
+
+            // Print message where exception occurred
+            // is displayed on console
+            System.out.println("Exception throws: " + e);
+        }
+    }
+}
