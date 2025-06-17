@@ -1,0 +1,46 @@
+public class SimpleLogic {
+    public static void main(String[] args) {
+        int number = 10;
+
+        // Example of an if-else statement
+        if (number > 0) {
+            System.out.println("The number is positive.");
+        } else if (number < 0) {
+            System.out.println("The number is negative.");
+        } else {
+            System.out.println("The number is zero.");
+        }
+
+        // Example of a for loop
+        System.out.println("Counting from 1 to 5:");
+        for (int i = 1; i <= 5; i++) {
+            System.out.println(i);
+        }
+
+        // Example of a while loop
+        int count = 0;
+        System.out.println("Counting with a while loop:");
+        while (count < 3) {
+            System.out.println("Count: " + count);
+            count++;
+        }
+
+        // Example of a switch statement
+        int day = 3;
+        String dayString;
+        switch (day) {
+            case 1:
+                dayString = "Monday";
+                break;
+            case 2:
+                dayString = "Tuesday";
+                break;
+            case 3:
+                dayString = "Wednesday";
+                break;
+            default:
+                dayString = "Other day";
+        }
+        System.out.println("Day of the week: " + dayString);
+    }
+}
