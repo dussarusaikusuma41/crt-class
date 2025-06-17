@@ -1,0 +1,73 @@
+class SharedPrinter {
+    private int number = 1;
+    private boolean isOddPrinted = false;
+
+    public synchronized void printOdd() throws InterruptedException {
+        while (isOddPrinted) {
+            wait();
+        }
+        System.out.println("Odd Thread: " + number);
+        number++;
+        isOddPrinted = true;
+        notify();
+    }
+
+    public synchronized void printEven() throws InterruptedException {
+        while (!isOddPrinted) {
+            wait();
+        }
+        System.out.println("Even Thread: " + number);
+        number++;
+        isOddPrinted = false;
+        notify();
+    }
+}
+
+class OddThread implements Runnable {
+    private SharedPrinter printer;
+
+    public OddThread(SharedPrinter printer) {
+        this.printer = printer;
+    }
+
+    @Override
+    public void run() {
+        try {
+            for (int i = 0; i < 5; i++) { // Prints 5 odd numbers
+                printer.printOdd();
+            }
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+    }
+}
+
+class EvenThread implements Runnable {
+    private SharedPrinter printer;
+
+    public EvenThread(SharedPrinter printer) {
+        this.printer = printer;
+    }
+
+    @Override
+    public void run() {
+        try {
+            for (int i = 0; i < 5; i++) { // Prints 5 even numbers
+                printer.printEven();
+            }
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+    }
+}
+
+public class EvenOddThreads {
+    public static void main(String[] args) {
+        SharedPrinter printer = new SharedPrinter();
+        Thread oddThread = new Thread(new OddThread(printer));
+        Thread evenThread = new Thread(new EvenThread(printer));
+
+        oddThread.start();
+        evenThread.start();
+    }
+}
