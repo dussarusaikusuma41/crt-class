@@ -1,0 +1,33 @@
+import java.util.LinkedList;
+import java.util.Queue;
+
+public class QueueExample {
+    public static void main(String[] args) {
+        Queue<String> queue = new LinkedList<>();
+
+        // Enqueue (add elements to the rear)
+        queue.offer("First");
+        queue.offer("Second");
+        queue.offer("Third");
+
+        System.out.println("Queue: " + queue); // Output: Queue: [First, Second, Third]
+
+        // Dequeue (remove elements from the front)
+        String removedElement = queue.poll();
+        System.out.println("Removed Element: " + removedElement); // Output: Removed Element: First
+        System.out.println("Queue after dequeue: " + queue); // Output: Queue after dequeue: [Second, Third]
+
+        // Peek (view the front element without removing it)
+        String frontElement = queue.peek();
+        Systemring.out.println("Front Element: " + frontElement); // Output: Front Element: Second
+        System.out.println("Queue after peek: " + queue); // Output: Queue after peek: [Second, Third]
+
+        // Check if the queue is empty
+        boolean isEmpty = queue.isEmpty();
+        System.out.println("Is queue empty: " + isEmpty); // Output: Is queue empty: false
+
+        // Get the size of the queue
+        int size = queue.size();
+        System.out.println("Queue size: " + size); // Output: Queue size: 2
+    }
+}
