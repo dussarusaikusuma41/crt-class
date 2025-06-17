@@ -1,0 +1,57 @@
+import java.util.*;
+
+class Graph {
+    private int V;   // Number of vertices
+    private LinkedList<Integer>[] adj; // Adjacency list
+
+    // Constructor
+    Graph(int v) {
+        V = v;
+        adj = new LinkedList[v];
+        for (int i = 0; i < v; ++i)
+            adj[i] = new LinkedList();
+    }
+
+    // Function to add an edge into the graph
+    void addEdge(int v, int w) {
+        adj[v].add(w);
+    }
+
+    // DFS traversal function
+    void DFS(int startNode) {
+        boolean[] visited = new boolean[V]; // Mark all vertices as not visited
+        Stack<Integer> stack = new Stack<>(); // Use a stack for DFS
+
+        stack.push(startNode); // Push the starting node
+
+        while (!stack.isEmpty()) {
+            int v = stack.pop(); // Pop a node from the stack
+
+            if (!visited[v]) { // If the node has not been visited
+                visited[v] = true; // Mark it as visited
+                System.out.print(v + " "); // Print the visited node
+
+                // Push all adjacent nodes to the stack
+                for (int neighbor : adj[v]) {
+                    if (!visited[neighbor]) {
+                        stack.push(neighbor);
+                    }
+                }
+            }
+        }
+    }
+
+    public static void main(String args[]) {
+        Graph g = new Graph(4);
+
+        g.addEdge(0, 1);
+        g.addEdge(0, 2);
+        g.addEdge(1, 2);
+        g.addEdge(2, 0);
+        g.addEdge(2, 3);
+        g.addEdge(3, 3);
+
+        System.out.println("Depth First Traversal starting from node 2:");
+        g.DFS(2);
+    }
+}
